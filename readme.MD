@@ -1,6 +1,6 @@
 <p ="center">
-   <img src="https://img.shields.io/npm/dt/discord-welcome-bot?style=for-the-badge">
-   <img src="https://img.shields.io/npm/v/discord-welcome-bot?style=for-the-badge">
+   <img src="https://img.shields.io/npm/dt/magikedenordinals?style=for-the-badge">
+   <img src="https://img.shields.io/npm/v/magikedenordinals?style=for-the-badge">
    <a href = "https://discord.gg/7UQaVPBQka" > <img src="https://img.shields.io/badge/Server-Invite-brightgreen" href = "">
    </a>
 </p>
@@ -9,8 +9,12 @@
 - [Collection](#Collection)
 
 # Start
+```bash
+npm i magikedenordinals
+```
+
 ```js
-const { Client } = require("")
+const { Client } = require("magikedenordinals")
 const client = new Client({
   key: <your magikeden api key>,
   debug: true, // debug
