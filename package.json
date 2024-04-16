@@ -4,7 +4,7 @@
     "dotenv": "^16.4.5"
   },
   "name": "magikedenordinals",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a package for magikeden ordinals with ws.",
   "main": "index.js",
   "scripts": {
@@ -26,5 +26,6 @@
   "bugs": {
     "url": "https://github.com/DreamBoy65/MagikEdenOrdinals/issues"
   },
-  "homepage": "https://github.com/DreamBoy65/MagikEdenOrdinals#readme"
+  "homepage": "https://github.com/DreamBoy65/MagikEdenOrdinals#readme",
+  "devDependencies": {}
 }
