@@ -6,6 +6,7 @@
 </p>
 
 # Table 
+- [API docs](https://docs.magiceden.io/reference/ordinals-overview)
 - [Collection](#Collection)
 
 # Start
@@ -15,6 +16,7 @@ npm i magikedenordinals
 
 ```js
 const { Client } = require("magikedenordinals")
+
 const client = new Client({
   key: <your magikeden api key>,
   debug: true, // debug
