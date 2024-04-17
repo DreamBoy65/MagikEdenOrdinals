@@ -8,6 +8,8 @@
 - [API docs](https://docs.magiceden.io/reference/ordinals-overview)
 - [Collection](#Collection)
 - [Activities](#Activities)
+- [Tokens](#Tokens)
+- [Block](#Block)
 
 # Start
 ```bash
