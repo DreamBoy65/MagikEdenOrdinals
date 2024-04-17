@@ -104,6 +104,13 @@ let rarity = [
 console.log(data)
 ```
 
++ getOfAllKind
+```js
+let activities = client.activities()
+let data = await activities.getOfAllKinds(<collection symbol>, options) // same options as get
+console.log(data)
+```
+
 # Tokens
 + get 
 ```js
