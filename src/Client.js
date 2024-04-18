@@ -4,6 +4,9 @@ const Collection = require("./Collection");
 const Activities = require("./Activities");
 const Tokens = require("./Tokens");
 const Block = require("./Block");
+const Brc20 = require("./Brc20");
+const Functions = require("../function");
+const Jsoning = require("jsoning");
 
 class MagikEden extends EventEmitter {
     constructor(config) {
@@ -11,6 +14,8 @@ class MagikEden extends EventEmitter {
         this.config = config;
         this.apiKey = config.key;
         this.isDebugTrue = config.debug;
+        this.func = Functions;
+        this.db = new Jsoning(".magikedenordinals.json");
     }
 
     collection(config) {
@@ -27,6 +32,10 @@ class MagikEden extends EventEmitter {
 
     block(config) {
         return new Block(this, config);
+    }
+
+    brc20(config) {
+        return new Brc20(this, config);
     }
 
     debug(e) {

@@ -12,6 +12,20 @@ client.on("debug", e => {
 });
 
 (async () => {
-    let data = await client.activities().getOfAllKinds("bbc");
-    console.log(data);
+    let collections = client.collection();
+    await collections.watch({
+        new: true
+    });
+
+    collections.on("start", () => {
+        console.log("collections alert started");
+    });
+    
+    collections.on("new", newcol => {
+        console.log(newcol)
+    });
+
+    await collections.startEvents();
+    
+    
 })();

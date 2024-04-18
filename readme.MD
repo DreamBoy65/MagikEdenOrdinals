@@ -59,6 +59,29 @@ let data = await collection.stat("<symbol>") // collection symbol
 console.log(data)
 ```
 
++ events 
+```js
+let collections = client.collection();
+await collections.watch({
+  new: true // new collection
+});
+
+collections.on("start", () => {
+  console.log("collections alert started");
+});
+
+collections.on("end", () => {
+  console.log("collections alert ended");
+});
+
+collections.on("new", newcol => {
+  console.log(newcol);
+});
+
+await collections.startEvents() // start events
+await collections.stopEvents() // stop events.
+```
+
 # Activities
 + all
 ```js
