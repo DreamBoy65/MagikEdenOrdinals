@@ -5,7 +5,7 @@
     "jsoning": "^0.13.23"
   },
   "name": "magikedenordinals",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "a package for magikeden ordinals with ws.",
   "main": "index.js",
   "scripts": {
