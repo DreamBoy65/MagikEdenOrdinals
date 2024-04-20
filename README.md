@@ -136,6 +136,29 @@ let data = await activities.getOfAllKinds(<collection symbol>, options) // same 
 console.log(data)
 ```
 
++ events 
+```js
+let acts = client.activities();
+await acts.watch({
+  new: true,
+  collectionsToWatchForNew: ["bbc"]
+});
+
+acts.on("start", () => {
+  console.log("Activities alert started");
+});
+
+acts.on("end", () => {
+  console.log("Activities alert ended");
+});
+
+acts.on("new", a => {
+  console.log(a);
+});
+
+await acts.startEvents();
+```
+
 # Tokens
 + get 
 ```js
@@ -145,20 +168,12 @@ let data = await tokens.get(option)
 /*
 options = {
   sortBy,
-  kind,
   satRarity,
   limit,
-  collectionSymbol
+  collectionSymbol,
+  ownerAddress,
+  tokenIds // separated by ","
 }
-
-this.kinds = [
-  "transfer",
-  "list",
-  "delist",
-  "buying_broadcasted",
-  "mint_broadcasted",
-  "create"
-];
 
 this.rarity = [
   "common",
@@ -182,6 +197,29 @@ this.sortBy = [
 */
 
 console.log(data)
+```
++ events 
+```js
+let token = client.tokens();
+await token.watch({
+    new: true,
+    collectionsToWatchForNew: ["bbc"],
+    AddressesToWatchForNew: [] // wallets
+});
+
+token.on("start", () => {
+    console.log("Tokens alert started");
+});
+
+token.on("end", () => {
+    console.log("Tokens alert ended");
+});
+
+token.on("new", a => {
+    console.log(a);
+});
+
+await token.startEvents();
 ```
 
 # Block 

@@ -1,5 +1,8 @@
-class Activites {
+const { EventEmitter } = require("events");
+
+class Activites extends EventEmitter {
     constructor(client, config) {
+        super();
         this.client = client;
         this.config = config;
 
@@ -19,6 +22,59 @@ class Activites {
             "rare",
             "epic"
         ];
+        this.events = {
+            new: false,
+            collectionsToWatchForNew: []
+        };
+        this.isEventsEnabled = false;
+    }
+
+    async handleEvents() {
+        while (this.isEventsEnabled) {
+            await this.newActsHandler();
+            await this.client.func.sleep(60);
+        }
+    }
+    async newActsHandler() {
+        for (const e of Array.isArray(this.events.collectionsToWatchForNew)
+            ? this.events.collectionsToWatchForNew
+            : []) {
+            let acts = await this.getOfAllKinds(e, {
+                limit: 20
+            });
+
+            let oldActs = (await this.client.db.get("ActsOf" + e)) ?? [];
+
+            for (const act of acts.activities) {
+                if (oldActs.includes(act.tokenId)) continue;
+                this.emit("new", act);
+            }
+
+            await this.client.db.set(
+                "ActsOf" + e,
+                acts.activities.map(e => e.tokenId)
+            );
+
+            await this.client.func.sleep(5);
+        }
+    }
+
+    watch(events = {}) {
+        Object.keys(events).forEach(e => {
+            this.events[e] = events[e];
+        });
+        return true;
+    }
+
+    async startEvents() {
+        this.emit("start");
+        this.isEventsEnabled = true;
+        return this.handleEvents();
+    }
+
+    async stopEvents() {
+        this.emit("end");
+        return (this.isEventsEnabled = false);
     }
 
     async all(limit = 20) {
@@ -30,7 +86,7 @@ class Activites {
         let {
             collectionSymbol = "dream",
             kind = "buying_broadcasted",
-            limit,
+            limit = 20,
             ownerAddress,
             satRarity,
             inscriptionMin,
@@ -77,7 +133,7 @@ class Activites {
         );
         promises = await Promise.all(promises);
         promises = promises.map(e => e.activities);
-        
+
         return { activities: [].concat(...promises) };
     }
 }

@@ -12,20 +12,24 @@ client.on("debug", e => {
 });
 
 (async () => {
-    let collections = client.collection();
-    await collections.watch({
-        new: true
+    let token = client.tokens();
+    await token.watch({
+        new: true,
+        collectionsToWatchForNew: ["bbc"],
+        AddressesToWatchForNew: ["bbc"],
     });
 
-    collections.on("start", () => {
-        console.log("collections alert started");
-    });
-    
-    collections.on("new", newcol => {
-        console.log(newcol)
+    token.on("start", () => {
+        console.log("Activities alert started");
     });
 
-    await collections.startEvents();
-    
-    
+    token.on("end", () => {
+        console.log("Activities alert ended");
+    });
+
+    token.on("new", a => {
+        console.log(a);
+    });
+
+    await token.startEvents();
 })();
